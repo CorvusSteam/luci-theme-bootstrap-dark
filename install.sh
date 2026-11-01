@@ -3,13 +3,13 @@
 #
 # Usage:
 #   sh install.sh [--activate]
-#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
-#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
+#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 #
 # If bootstrap-dark.css is not found next to this script, it is downloaded from RAW_BASE.
 set -e
 
-RAW_BASE="https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main"
+RAW_BASE="https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main"
 
 STATIC_SRC=/www/luci-static/bootstrap
 STATIC_DST=/www/luci-static/bootstrap-dark
