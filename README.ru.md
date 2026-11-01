@@ -32,7 +32,7 @@
 (замените `<USER>` на имя аккаунта GitHub):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
+wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
 ```
 
 Скрипт сам скачивает `bootstrap-dark.css`. Нужен только `wget`, который входит в состав OpenWrt,
@@ -71,7 +71,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh
 (первая команда для Варианта 1, вторая для Варианта 2):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ```
 
@@ -89,7 +89,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ## Удаление
 
 ```sh
-wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/uninstall.sh | sh
+wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/uninstall.sh | sh
 ```
 
 Если скачанная папка ещё есть, вместо этого можно запустить `sh uninstall.sh` из неё.
@@ -104,7 +104,7 @@ wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/mai
 
 ```sh
 cp /www/luci-static/bootstrap/cascade.css /root/cascade.css.bak
-wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
+wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
 ```
 
 Файл обёрнут в `@media (prefers-color-scheme: dark)`, поэтому в светлом режиме он ни на что не влияет.
