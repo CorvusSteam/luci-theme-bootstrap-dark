@@ -130,7 +130,9 @@ table th, .th, .table .tr.table-titles .th, .cbi-section-table-titles th,
 	background-color: var(--bg-card) !important;
 }
 .table > .tr:nth-child(even), tr.cbi-rowstyle-2, .cbi-rowstyle-2, tr:nth-child(even) > td {
-	background-color: var(--bg-alt) !important;
+	/* no zebra striping: even rows use the same color as odd rows.
+	   To bring the stripes back, change this to var(--bg-alt). */
+	background-color: var(--bg-card) !important;
 }
 tr.cbi-section-table-row:hover, .table .tr:hover { background-color: var(--bg-hover) !important; }
 .cbi-section-table-row, .cbi-section-table-titles { border-color: var(--border) !important; }
