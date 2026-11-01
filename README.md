@@ -16,7 +16,6 @@ modelled on the dark mode that ships with newer OpenWrt releases (22.03 / 23.05)
 - CSS only: no packages to build, no compilation.
 - Covers the overview page, interfaces, realtime graphs, forms, dynamic lists, tables,
   tabs, dropdowns, buttons, alerts and modal dialogs.
-- Survives firmware upgrades (`sysupgrade`) via entries in `/etc/sysupgrade.conf`.
 
 ## Requirements
 
