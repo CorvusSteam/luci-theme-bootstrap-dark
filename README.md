@@ -3,7 +3,7 @@
 # luci-theme-bootstrap-dark
 
 A dark theme for LuCI on **OpenWrt 19.07**, visually close to the stock `bootstrap` theme and
-modelled on the dark mode that ships with newer OpenWrt releases (22.03 / 23.05).
+modelled on the dark mode of newer OpenWrt releases (22.03 / 23.05).
 
 <!-- Add screenshots to the screenshots/ folder and uncomment: -->
 <!-- ![Status](screenshots/status.png) -->
@@ -11,12 +11,13 @@ modelled on the dark mode that ships with newer OpenWrt releases (22.03 / 23.05)
 
 ## Features
 
-- Does not replace the stock theme. It installs as a separate **BootstrapDark** entry under
+- Does not replace the stock theme. It is installed as a separate **BootstrapDark** entry under
   *System → System → Language and Style → Theme*.
-- CSS only: no packages to build, no compilation.
-- Covers the overview page, interfaces, realtime graphs, forms, dynamic lists, tables,
-  tabs, dropdowns, buttons, alerts and modal dialogs.
-- Survives firmware upgrades (`sysupgrade`) via entries in `/etc/sysupgrade.conf`.
+- CSS only: nothing to build or compile, no extra packages on the router.
+- Covers the overview page, interfaces, realtime graphs, forms, dynamic lists, tables, tabs,
+  dropdowns, buttons, alerts and modal dialogs.
+- Survives firmware upgrades (`sysupgrade`) when settings are kept, thanks to entries in
+  `/etc/sysupgrade.conf`.
 
 ## Requirements
 
@@ -25,9 +26,37 @@ modelled on the dark mode that ships with newer OpenWrt releases (22.03 / 23.05)
 
 ## Installation
 
-### Option 1: copy from your computer (recommended)
+### Option 1: download directly on the router (recommended)
 
-1. Download this repository as a ZIP (**Code → Download ZIP**) and extract it.
+The router needs internet access and a correct system time. Run over SSH
+(replace `<USER>` with the GitHub account name):
+
+```sh
+mkdir -p /tmp/bsdark && cd /tmp/bsdark
+BASE=https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main
+
+wget -O install.sh $BASE/install.sh
+wget -O bootstrap-dark.css $BASE/bootstrap-dark.css
+sh install.sh
+
+cd /tmp && rm -rf /tmp/bsdark
+```
+
+This needs nothing but `wget`, which is part of OpenWrt, and everything is downloaded into
+`/tmp` (RAM), so no flash space is used. You can read the scripts before running them.
+
+If `wget` reports a certificate or HTTPS error:
+
+- check the time with `date`: with a wrong clock the certificate check fails;
+- make sure HTTPS support is installed: `opkg update && opkg install ca-bundle libustream-mbedtls`.
+
+If the repository's default branch is not `main` (for example `master`), change it in `BASE`.
+
+### Option 2: copy from your computer
+
+Use this if the router has no internet access.
+
+1. Download the repository as a ZIP (**Code → Download ZIP**) and extract it.
 2. Copy the folder to the router and run the installer:
 
 ```sh
@@ -36,24 +65,15 @@ ssh root@192.168.1.1
 sh /tmp/luci-theme-bootstrap-dark/install.sh
 ```
 
-> The `-O` flag makes `scp` use the legacy protocol, which OpenWrt 19.07 (Dropbear) requires
-> with recent OpenSSH clients. On Windows 10/11, `scp` and `ssh` are available in PowerShell.
-
-### Option 2: clone on the router
-
-```sh
-opkg update && opkg install git git-http
-git clone https://github.com/<USER>/luci-theme-bootstrap-dark.git
-cd luci-theme-bootstrap-dark
-sh install.sh
-```
+> The `-O` flag makes `scp` use the legacy protocol. OpenWrt 19.07 (Dropbear) has no SFTP server,
+> and OpenSSH 9.0+ uses SFTP by default. On Windows 10/11, `scp` and `ssh` are available in PowerShell.
 
 ### Activate
 
 Hard-refresh the browser (Ctrl+F5), open *System → System → Language and Style*,
 choose **BootstrapDark** and click *Save & Apply*.
 
-To make the theme active immediately, run the installer with `--activate`:
+To make the theme active right after installation, run the installer with `--activate`:
 
 ```sh
 sh install.sh --activate
@@ -73,23 +93,26 @@ The installer refuses to run if the stock `bootstrap` theme already contains a d
 ## Uninstallation
 
 ```sh
-sh uninstall.sh
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/uninstall.sh | sh
 ```
 
-This switches the active theme back to `bootstrap` if needed, removes the theme files and the
-UCI entry, and deletes the lines from `/etc/sysupgrade.conf`.
+If you still have the downloaded folder, you can run `sh uninstall.sh` from it instead.
+
+The script switches the active theme back to `bootstrap` if needed, removes the theme files and
+the UCI entry, and deletes the lines from `/etc/sysupgrade.conf`.
 
 ## Alternative: automatic dark mode
 
-If you prefer a single theme that turns dark only when your OS/browser prefers dark mode,
-append `bootstrap-dark.css` as is to `/www/luci-static/bootstrap/cascade.css`:
+If you prefer a single theme that turns dark only when your OS or browser uses dark mode,
+append `bootstrap-dark.css` as is to the stock theme:
 
 ```sh
 cp /www/luci-static/bootstrap/cascade.css /root/cascade.css.bak
-cat bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
 ```
 
 The file is wrapped in `@media (prefers-color-scheme: dark)`, so it has no effect in light mode.
+To undo, restore the backup: `cp /root/cascade.css.bak /www/luci-static/bootstrap/cascade.css`.
 Do not combine this with `install.sh` (see the note above).
 
 ## Customization
@@ -105,14 +128,16 @@ All colors are defined as CSS variables at the top of `bootstrap-dark.css`:
 --accent: #5ea1f0;
 ```
 
-Edit them and run `install.sh` again to apply your palette.
+To change them, edit `bootstrap-dark.css` before running `install.sh` (Option 2 is the most
+convenient for this), or edit `/www/luci-static/bootstrap-dark/cascade.css` on the router
+after installation. Reload the page with Ctrl+F5 to see the result.
 
 ## Known limitations
 
 - The realtime graphs are recolored by inverting the whole chart, so shades may differ slightly
   from the original.
-- Designed for OpenWrt 19.07. Later releases (21.02+) use a different `bootstrap` layout and
-  include their own dark mode.
+- Designed for OpenWrt 19.07. Releases 22.03 and later have a different `bootstrap` layout and
+  ship their own dark mode, so this theme is not intended for them.
 - Third-party `luci-app-*` packages that ship their own CSS may still show light elements.
 
 ## Contributing
