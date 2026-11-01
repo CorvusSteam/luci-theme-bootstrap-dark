@@ -1,0 +1,477 @@
+/* ==========================================================
+   Dark mode for LuCI bootstrap theme (OpenWrt 19.07)
+   Palette is modelled on the dark mode of OpenWrt 22.03/23.05.
+   Applies automatically when the OS/browser prefers dark.
+   To force dark always: remove the "@media" line and its
+   closing brace at the bottom of the file.
+   ========================================================== */
+@media (prefers-color-scheme: dark) {
+
+:root {
+	color-scheme: dark;
+	--bg:        #1b1b1b;   /* page */
+	--bg-card:   #242424;   /* sections, tables */
+	--bg-alt:    #2b2b2b;   /* odd rows, headers of tables */
+	--bg-input:  #181818;   /* inputs */
+	--bg-hover:  #333333;
+	--text:      #e4e4e4;
+	--text-dim:  #a0a0a0;
+	--border:    #3d3d3d;
+	--accent:    #5ea1f0;
+	--accent-bg: #2d5f9e;
+	--ok:        #2f8f4e;
+	--warn:      #b8860b;
+	--err:       #b33a3a;
+}
+
+/* ---------- base ---------- */
+html, body {
+	background: var(--bg) !important;
+	color: var(--text) !important;
+}
+a, a:visited { color: var(--accent); }
+a:hover { color: #8dbdf5; }
+hr { border-color: var(--border); }
+h1, h2, h3, h4, h5, h6, legend, label, strong, b, th, dt, dd { color: var(--text); }
+small, .help-block, .cbi-value-description, .cbi-section-descr { color: var(--text-dim) !important; }
+pre, code, tt, kbd {
+	background: var(--bg-input) !important;
+	color: #d6d6d6 !important;
+	border: 1px solid var(--border) !important;
+}
+::selection { background: var(--accent-bg); color: #fff; }
+
+/* ---------- header / top menu ---------- */
+header, .navbar, .navbar-inner {
+	background: #101010 !important;
+	background-image: none !important;
+	border-color: var(--border) !important;
+	box-shadow: none !important;
+}
+header a, header .brand, .navbar a, .navbar .brand { color: #ddd !important; text-shadow: none !important; }
+#modemenu, #modemenu li a { background: transparent !important; }
+#modemenu li a:hover, #modemenu li.active a { background: var(--bg-hover) !important; color: #fff !important; }
+
+#topmenu, #topmenu li, #topmenu ul {
+	background: transparent !important;
+	border-color: var(--border) !important;
+}
+#topmenu a, #topmenu li a { color: #ddd !important; }
+#topmenu li:hover > a, #topmenu li.active > a, #topmenu a:hover {
+	background: var(--bg-hover) !important;
+	color: #fff !important;
+}
+.dropdown-menu, #topmenu ul.dropdown-menu {
+	background: var(--bg-card) !important;
+	border: 1px solid var(--border) !important;
+}
+.dropdown-menu li a { color: var(--text) !important; }
+.dropdown-menu li a:hover { background: var(--bg-hover) !important; }
+
+/* tab-style menus (tabs under the page title) */
+ul.cbi-tabmenu, .cbi-tabmenu {
+	background: transparent !important;
+	border-bottom: 1px solid var(--border) !important;
+}
+ul.cbi-tabmenu li, .cbi-tabmenu li {
+	background: var(--bg-alt) !important;
+	border: 1px solid var(--border) !important;
+	border-bottom: none !important;
+}
+ul.cbi-tabmenu li a, .cbi-tabmenu li a { color: var(--text-dim) !important; }
+ul.cbi-tabmenu li.cbi-tab, .cbi-tabmenu li.cbi-tab, ul.cbi-tabmenu li.active {
+	background: var(--bg-card) !important;
+}
+ul.cbi-tabmenu li.cbi-tab a, .cbi-tabmenu li.cbi-tab a { color: var(--text) !important; }
+.cbi-tabmenu li:hover { background: var(--bg-hover) !important; }
+
+/* left side menu (if present) */
+#mainmenu, .main-left, .main-left ul, .main-left li { background: transparent !important; }
+
+/* ---------- content containers ---------- */
+#maincontent, .container, .main, .main-right, #view {
+	background: transparent !important;
+	color: var(--text);
+}
+.cbi-map, .cbi-section, .cbi-section-node, fieldset.cbi-section,
+.cbi-map-descr, .panel, .well {
+	background: var(--bg-card) !important;
+	border-color: var(--border) !important;
+	color: var(--text);
+}
+.cbi-map { background: transparent !important; }
+.cbi-section { padding: 10px 14px; border: 1px solid var(--border) !important; border-radius: 3px; }
+.cbi-section-node { border-color: var(--border) !important; }
+.cbi-section > h3, .cbi-map > h2, .cbi-section legend { color: var(--text) !important; border-color: var(--border) !important; }
+.cbi-page-actions {
+	background: var(--bg-card) !important;
+	border-color: var(--border) !important;
+}
+.cbi-value { border-color: var(--border) !important; }
+.cbi-value-title, .cbi-value-field, .cbi-value-helpicon { color: var(--text); }
+.cbi-section-remove, .cbi-section-create { background: transparent !important; }
+
+/* ---------- tables (classic + div-based) ---------- */
+table, .table, .cbi-section-table, table.cbi-section-table {
+	background: var(--bg-card) !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+table th, table td, .th, .td, .tr {
+	border-color: var(--border) !important;
+	color: var(--text);
+}
+table th, .th, .table .tr.table-titles .th, .cbi-section-table-titles th,
+.cbi-section-table-titles .th, tr.cbi-section-table-titles {
+	background: var(--bg-alt) !important;
+	color: var(--text) !important;
+}
+.table > .tr:nth-child(odd), tr.cbi-rowstyle-1, .cbi-rowstyle-1, tr:nth-child(odd) > td {
+	background-color: var(--bg-card) !important;
+}
+.table > .tr:nth-child(even), tr.cbi-rowstyle-2, .cbi-rowstyle-2, tr:nth-child(even) > td {
+	background-color: var(--bg-alt) !important;
+}
+tr.cbi-section-table-row:hover, .table .tr:hover { background-color: var(--bg-hover) !important; }
+.cbi-section-table-row, .cbi-section-table-titles { border-color: var(--border) !important; }
+.table .tr.placeholder .td, .cbi-section-table-row.placeholder td { color: var(--text-dim) !important; }
+
+/* ---------- form controls ---------- */
+input, select, textarea,
+.cbi-input-text, .cbi-input-password, .cbi-input-select, .cbi-input-textarea,
+.cbi-input-file, .cbi-input-user, .cbi-input-password,
+.form-control, .uneditable-input {
+	background: var(--bg-input) !important;
+	color: var(--text) !important;
+	border: 1px solid var(--border) !important;
+	box-shadow: none !important;
+}
+input::placeholder, textarea::placeholder { color: #707070 !important; }
+input:focus, select:focus, textarea:focus {
+	border-color: var(--accent) !important;
+	outline: none !important;
+	box-shadow: 0 0 0 2px rgba(94, 161, 240, .25) !important;
+}
+input[disabled], select[disabled], textarea[disabled], input[readonly] {
+	background: #222 !important;
+	color: var(--text-dim) !important;
+	opacity: .8;
+}
+option, optgroup { background: var(--bg-input); color: var(--text); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+
+/* dynamic dropdown widgets (cbi-dropdown) */
+.cbi-dropdown {
+	background: var(--bg-input) !important;
+	border: 1px solid var(--border) !important;
+	color: var(--text) !important;
+}
+.cbi-dropdown > ul > li, .cbi-dropdown > ul { color: var(--text) !important; background: transparent !important; }
+.cbi-dropdown[open] > ul.dropdown, .cbi-dropdown > ul.dropdown {
+	background: var(--bg-card) !important;
+	border: 1px solid var(--border) !important;
+}
+.cbi-dropdown > ul > li[selected], .cbi-dropdown > ul > li:hover {
+	background: var(--bg-hover) !important;
+}
+.cbi-dropdown > ul > li[selected] { background: var(--accent-bg) !important; color: #fff !important; }
+.cbi-dropdown > .open, .cbi-dropdown > .more { color: var(--text-dim) !important; }
+.cbi-dropdown > ul > li input[type="text"] { background: transparent !important; border: none !important; }
+
+/* ---------- buttons ---------- */
+.btn, .cbi-button, button, input[type="button"], input[type="submit"], input[type="reset"] {
+	background: #333 !important;
+	background-image: none !important;
+	color: var(--text) !important;
+	border: 1px solid #555 !important;
+	text-shadow: none !important;
+	box-shadow: none !important;
+}
+.btn:hover, .cbi-button:hover, button:hover { background: #404040 !important; border-color: #6a6a6a !important; }
+.cbi-button-action, .cbi-button-apply, .cbi-button-save, .cbi-button-positive,
+.cbi-button-add, .btn-primary, .cbi-button-link {
+	background: var(--accent-bg) !important;
+	border-color: #3b74b8 !important;
+	color: #fff !important;
+}
+.cbi-button-action:hover, .cbi-button-apply:hover, .cbi-button-save:hover,
+.cbi-button-add:hover, .btn-primary:hover { background: #3a73b8 !important; }
+.cbi-button-negative, .cbi-button-remove, .cbi-button-reset, .btn-danger {
+	background: var(--err) !important;
+	border-color: #8c2c2c !important;
+	color: #fff !important;
+}
+.cbi-button-negative:hover, .cbi-button-remove:hover, .btn-danger:hover { background: #c94a4a !important; }
+.cbi-button[disabled], button[disabled], .btn[disabled] { opacity: .45; }
+
+/* ---------- alerts / notices / modal ---------- */
+.alert-message, .alert, .cbi-section-error, .cbi-map-error, div.error {
+	background: #3a2323 !important;
+	border: 1px solid #6e3434 !important;
+	color: #f1b0b0 !important;
+	text-shadow: none !important;
+}
+.alert-message.warning, .alert-warning {
+	background: #3b3220 !important;
+	border-color: #7a6228 !important;
+	color: #ecd28a !important;
+}
+.alert-message.info, .alert-info, .alert-message.notice {
+	background: #1f3044 !important;
+	border-color: #345b86 !important;
+	color: #a9cdf1 !important;
+}
+.alert-message.success, .alert-success {
+	background: #1f3a29 !important;
+	border-color: #2f6a45 !important;
+	color: #a6dbb7 !important;
+}
+.alert-message h4 { color: inherit !important; }
+
+#modal_overlay, .modal-overlay { background: rgba(0, 0, 0, .65) !important; }
+.modal, #modal_overlay > .modal {
+	background: var(--bg-card) !important;
+	color: var(--text) !important;
+	border: 1px solid var(--border) !important;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, .6) !important;
+}
+.modal > h4, .modal h4 { color: var(--text) !important; }
+
+/* tooltips / popups */
+.cbi-tooltip, .cbi-tooltip-container .cbi-tooltip {
+	background: #111 !important;
+	border: 1px solid var(--border) !important;
+	color: var(--text) !important;
+}
+.ifacebadge, .network-status-badge, .zonebadge {
+	border-color: var(--border) !important;
+	color: #111 !important; /* colored badges keep dark text */
+}
+.ifacebox, .ifacebox-head { border-color: var(--border) !important; }
+.ifacebox { background: var(--bg-card) !important; }
+.ifacebox-body { background: var(--bg-card) !important; color: var(--text) !important; }
+
+/* labels / badges */
+.label, .badge { text-shadow: none !important; }
+.label-default, .badge { background: #444 !important; color: #eee !important; }
+
+/* ---------- progress bars ---------- */
+.cbi-progressbar, .progress {
+	background: var(--bg-input) !important;
+	border: 1px solid var(--border) !important;
+	box-shadow: none !important;
+}
+.cbi-progressbar > div, .progress .bar { background: var(--accent-bg) !important; }
+.cbi-progressbar::after { color: var(--text) !important; text-shadow: none !important; }
+
+/* ---------- status / graphs (SVG) ---------- */
+svg { color: var(--text); }
+svg[style*="background"], svg#svg, svg.graph {
+	background-color: #181818 !important;
+	border-color: var(--border) !important;
+}
+svg text, svg tspan { fill: #cfcfcf !important; }
+svg line[stroke="black"], svg line[style*="black"] { stroke: #555 !important; }
+svg line[style*="#ccc"], svg line[style*="rgb(204"] { stroke: #3a3a3a !important; }
+svg rect[fill="white"], svg rect[fill="#fff"], svg rect[fill="#ffffff"] { fill: #181818 !important; }
+#view .cbi-section > div[style*="background"], div[style*="background-color: #fff"],
+div[style*="background-color:#fff"], div[style*="background: #fff"] {
+	background-color: var(--bg-card) !important;
+}
+
+/* ---------- login page ---------- */
+.cbi-map form.login, #login, form[name="loginform"], .login-form { background: transparent !important; }
+
+/* ---------- footer ---------- */
+footer, .footer, .pull-right a { color: var(--text-dim) !important; }
+footer { border-color: var(--border) !important; background: transparent !important; }
+
+/* ---------- scrollbars (Firefox / WebKit) ---------- */
+* { scrollbar-color: #555 var(--bg); }
+::-webkit-scrollbar { background: var(--bg); width: 12px; height: 12px; }
+::-webkit-scrollbar-thumb { background: #555; border-radius: 6px; border: 2px solid var(--bg); }
+
+/* ---------- hover fix (rows were turning white) ---------- */
+html body .table .tr:hover,
+html body .table .tr:hover > .td,
+html body .table .tr:hover > .th,
+html body table tr:hover,
+html body table tr:hover > td,
+html body table tr:hover > th,
+html body .cbi-section-table-row:hover,
+html body .cbi-section-table-row:hover > td,
+html body .cbi-section-table-row:hover > .td,
+html body [class*="cbi-rowstyle"]:hover,
+html body [class*="cbi-rowstyle"]:hover > td,
+html body [class*="cbi-rowstyle"]:hover > .td,
+html body .cbi-section-node:hover,
+html body .cbi-value:hover {
+	background-color: var(--bg-hover) !important;
+	background-image: none !important;
+	color: var(--text) !important;
+}
+html body tr:hover .ifacebox, html body .tr:hover .ifacebox { background: var(--bg-card) !important; }
+
+/* ---------- badges on the status page (white boxes) ---------- */
+html body .ifacebadge,
+html body .ifacebadge.large,
+html body .ifacebadge-active,
+html body .network-status-badge,
+html body .cbi-tooltip-container .ifacebadge {
+	background-color: var(--bg-alt) !important;
+	background-image: none !important;
+	border: 1px solid var(--border) !important;
+	color: var(--text) !important;
+	box-shadow: none !important;
+}
+html body .ifacebadge *,
+html body .ifacebadge strong,
+html body .ifacebadge small,
+html body .ifacebadge span,
+html body .ifacebadge em {
+	color: var(--text) !important;
+}
+html body .ifacebadge strong { color: var(--text-dim) !important; }
+html body .ifacebadge:hover { background-color: var(--bg-hover) !important; }
+
+/* empty "no leases" rows: same color across the whole row */
+html body .table .tr.placeholder,
+html body .table .tr.placeholder > .td,
+html body .table .tr[class*="placeholder"] > .td,
+html body tr.placeholder > td,
+html body .cbi-section-table-row.placeholder > td {
+	background-color: var(--bg-card) !important;
+}
+
+/* ---------- realtime graphs page: tab bar ---------- */
+html body [class*="tabmenu"],
+html body ul[class*="tab"],
+html body .tabs,
+html body #tabmenu,
+html body .cbi-tabcontainer-header {
+	background: transparent !important;
+	background-image: none !important;
+	border-color: var(--border) !important;
+	box-shadow: none !important;
+}
+html body [class*="tabmenu"] li,
+html body ul[class*="tab"] > li,
+html body .tabs > li,
+html body li[class*="cbi-tab"] {
+	background: var(--bg-alt) !important;
+	background-image: none !important;
+	border: 1px solid var(--border) !important;
+	border-bottom-color: transparent !important;
+	box-shadow: none !important;
+}
+html body [class*="tabmenu"] li a,
+html body ul[class*="tab"] > li > a,
+html body .tabs > li > a,
+html body li[class*="cbi-tab"] a {
+	background: transparent !important;
+	color: var(--text-dim) !important;
+	text-shadow: none !important;
+}
+/* active tab */
+html body li.cbi-tab,
+html body li.active,
+html body .tabs > li.active,
+html body [class*="tabmenu"] li.cbi-tab {
+	background: var(--bg-card) !important;
+}
+html body li.cbi-tab > a,
+html body li.active > a,
+html body [class*="tabmenu"] li.cbi-tab > a {
+	color: var(--accent) !important;
+}
+html body li[class*="cbi-tab"]:hover { background: var(--bg-hover) !important; }
+
+/* ---------- realtime graphs: chart itself ---------- */
+/* Graphs in 19.07 are loaded as external SVG (embed/object), so their
+   inner colors can't be styled from here. Invert the whole element:
+   white -> dark, black text -> light, orange stays orange. */
+html body embed,
+html body object[type*="svg"],
+html body object[data*=".svg"],
+html body iframe[src*=".svg"] {
+	filter: invert(1) hue-rotate(180deg) !important;
+	background-color: #fff !important;   /* becomes dark after inversion */
+	border: 1px solid #c8c8c8 !important; /* becomes dark gray after inversion */
+}
+
+/* ---------- realtime graphs: universal chart fix ----------
+   Covers both cases: inline <svg> and external svg (embed/object/iframe).
+   The chart is drawn in its original light colors and then inverted as a whole:
+   white -> dark, black text -> light, orange stays orange. */
+html body svg,
+html body embed,
+html body object,
+html body iframe[src*=".svg"] {
+	filter: invert(1) hue-rotate(180deg) !important;
+	background-color: #fff !important;   /* turns dark after inversion */
+	border-color: #c8c8c8 !important;    /* turns dark gray after inversion */
+}
+/* undo my earlier "dark" svg tweaks so they don't get inverted twice */
+html body svg text, html body svg tspan { fill: #000 !important; }
+html body svg line[stroke="black"], html body svg line[style*="black"] { stroke: #000 !important; }
+html body svg line[style*="#ccc"], html body svg line[style*="rgb(204"] { stroke: #ccc !important; }
+html body svg rect[fill="white"], html body svg rect[fill="#fff"], html body svg rect[fill="#ffffff"],
+html body svg rect[fill="#FFF"], html body svg rect[fill="#FFFFFF"] { fill: #fff !important; }
+
+/* ---------- form labels on the left (were blending into the background) ---------- */
+html body .cbi-value-title,
+html body .cbi-value > label,
+html body .cbi-value label.cbi-value-title,
+html body .cbi-value-title *,
+html body .cbi-value-field + .cbi-value-title,
+html body label,
+html body .control-label {
+	color: #cfcfcf !important;
+	opacity: 1 !important;
+	text-shadow: none !important;
+}
+/* labels inside buttons/checkbox captions keep normal text color */
+html body .cbi-checkbox label, html body .cbi-radio label { color: var(--text) !important; }
+
+/* page description strip under the title */
+html body .cbi-map-descr {
+	background: transparent !important;
+	color: var(--text-dim) !important;
+}
+
+/* ---------- dynamic lists (e.g. NTP servers): white items ---------- */
+html body .cbi-dynlist > .item,
+html body .cbi-dynlist .item,
+html body .cbi-dynlist > .add-item,
+html body .cbi-dynlist > .add-item > input {
+	background-color: var(--bg-input) !important;
+	background-image: none !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+	box-shadow: none !important;
+}
+html body .cbi-dynlist > .item:hover { background-color: var(--bg-hover) !important; }
+html body .cbi-dynlist > .item::after,
+html body .cbi-dynlist > .add-item > .cbi-button {
+	background-color: #333 !important;
+	background-image: none !important;
+	border-color: var(--border) !important;
+	color: #ff7a7a !important;
+}
+html body .cbi-dynlist > .add-item > .cbi-button-add,
+html body .cbi-dynlist > .add-item > button {
+	background-color: var(--accent-bg) !important;
+	color: #fff !important;
+}
+
+/* zone-colored interface headers (LAN/WAN/...): keep their own color, dark text */
+html body .ifacebox-head[style*="background"] { color: #000 !important; }
+
+/* headers without zone color (radio0, "IPv4 upstream", ...): dark instead of white */
+html body .ifacebox-head:not([style*="background"]) {
+	background-color: var(--bg-alt) !important;
+	background-image: none !important;
+	color: var(--text) !important;
+}
+
+} /* end @media (prefers-color-scheme: dark) */
