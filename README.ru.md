@@ -5,9 +5,6 @@
 Тёмная тема для LuCI на **OpenWrt 19.07**, максимально близкая к стандартной теме `bootstrap`
 и оформленная по образцу тёмного режима в OpenWrt 22.03/23.05.
 
-Dark theme for LuCI on **OpenWrt 19.07**, visually close to the stock `bootstrap` theme and
-modelled on the dark mode of newer OpenWrt releases.
-
 <!-- Добавьте скриншоты: -->
 <!-- ![Status](screenshots/status.png) -->
 
