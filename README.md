@@ -26,10 +26,7 @@ modelled on the dark mode of newer OpenWrt releases (22.03 / 23.05).
 
 ## Installation
 
-### Option 1: one command on the router (recommended)
-
-The router needs internet access and a correct system time. Run over SSH
-(replace `<USER>` with the GitHub account name):
+### Option 1:
 
 ```sh
 wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
