@@ -43,7 +43,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh
 
 ```sh
 opkg update && opkg install git git-http
-git clone https://github.com/<USER>/luci-theme-bootstrap-dark.git
+git clone https://github.com/CorvusSteam/luci-theme-bootstrap-dark.git
 cd luci-theme-bootstrap-dark
 sh install.sh
 ```
