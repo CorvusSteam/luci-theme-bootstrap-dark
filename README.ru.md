@@ -26,31 +26,25 @@
 
 ## Установка
 
-### Вариант 1: скачивание прямо на роутере (рекомендуется)
+### Вариант 1: одна команда на роутере (рекомендуется)
 
 Роутеру нужен доступ в интернет и правильное системное время. Выполните по SSH
 (замените `<USER>` на имя аккаунта GitHub):
 
 ```sh
-mkdir -p /tmp/bsdark && cd /tmp/bsdark
-BASE=https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main
-
-wget -O install.sh $BASE/install.sh
-wget -O bootstrap-dark.css $BASE/bootstrap-dark.css
-sh install.sh
-
-cd /tmp && rm -rf /tmp/bsdark
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
 ```
 
-Нужен только `wget`, который входит в состав OpenWrt, а всё скачивается в `/tmp` (оперативная память),
-поэтому флеш-память не расходуется. Скрипты можно прочитать до запуска.
+Скрипт сам скачивает `bootstrap-dark.css`. Нужен только `wget`, который входит в состав OpenWrt,
+а всё проходит через `/tmp` (оперативная память), поэтому флеш-память не расходуется. Скрипт можно
+сначала прочитать, открыв этот же адрес в браузере.
 
 Если `wget` сообщает об ошибке сертификата или HTTPS:
 
 - проверьте время командой `date`: при неверных часах проверка сертификата не проходит;
 - убедитесь, что установлена поддержка HTTPS: `opkg update && opkg install ca-bundle libustream-mbedtls`.
 
-Если основная ветка репозитория называется не `main` (например, `master`), замените её в `BASE`.
+Если основная ветка репозитория называется не `main` (например, `master`), замените её в адресе.
 
 ### Вариант 2: копирование с компьютера
 
@@ -73,10 +67,12 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh
 Обновите страницу в браузере (Ctrl+F5), откройте *Система → Система → Язык и тема*,
 выберите **BootstrapDark** и нажмите «Сохранить и применить».
 
-Чтобы тема стала активной сразу после установки, запустите установщик с ключом `--activate`:
+Чтобы тема стала активной сразу после установки, добавьте ключ `--activate`
+(первая команда для Варианта 1, вторая для Варианта 2):
 
 ```sh
-sh install.sh --activate
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ```
 
 ### Что делает установщик
