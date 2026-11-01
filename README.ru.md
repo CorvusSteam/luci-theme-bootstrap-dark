@@ -26,10 +26,7 @@
 
 ## Установка
 
-### Вариант 1: одна команда на роутере (рекомендуется)
-
-Роутеру нужен доступ в интернет и правильное системное время. Выполните по SSH
-(замените `<USER>` на имя аккаунта GitHub):
+### Вариант 1:
 
 ```sh
 wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
