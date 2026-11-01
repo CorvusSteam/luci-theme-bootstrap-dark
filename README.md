@@ -16,6 +16,7 @@ modelled on the dark mode that ships with newer OpenWrt releases (22.03 / 23.05)
 - CSS only: no packages to build, no compilation.
 - Covers the overview page, interfaces, realtime graphs, forms, dynamic lists, tables,
   tabs, dropdowns, buttons, alerts and modal dialogs.
+- Survives firmware upgrades (`sysupgrade`) via entries in `/etc/sysupgrade.conf`.
 
 ## Requirements
 
@@ -36,13 +37,13 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh
 ```
 
 > The `-O` flag makes `scp` use the legacy protocol, which OpenWrt 19.07 (Dropbear) requires
-> with recent OpenSSH clients. On Windows 10/11 `scp` and `ssh` are available in PowerShell.
+> with recent OpenSSH clients. On Windows 10/11, `scp` and `ssh` are available in PowerShell.
 
 ### Option 2: clone on the router
 
 ```sh
 opkg update && opkg install git git-http
-git clone https://github.com/CorvusSteam/luci-theme-bootstrap-dark.git
+git clone https://github.com/<USER>/luci-theme-bootstrap-dark.git
 cd luci-theme-bootstrap-dark
 sh install.sh
 ```
