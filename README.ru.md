@@ -29,7 +29,7 @@ modelled on the dark mode of newer OpenWrt releases.
 
 ```sh
 opkg update && opkg install git git-http   # либо просто скачайте архив с GitHub
-git clone https://github.com/<USER>/luci-theme-bootstrap-dark.git
+git clone https://github.com/CorvusSteam/luci-theme-bootstrap-dark.git
 cd luci-theme-bootstrap-dark
 sh install.sh            # добавляет пункт BootstrapDark в меню тем
 # или:
@@ -75,7 +75,7 @@ sh uninstall.sh
 ## English summary
 
 ```sh
-git clone https://github.com/<USER>/luci-theme-bootstrap-dark.git
+git clone https://github.com/CorvusSteam/luci-theme-bootstrap-dark.git
 cd luci-theme-bootstrap-dark && sh install.sh
 ```
 
