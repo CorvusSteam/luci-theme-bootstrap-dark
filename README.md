@@ -26,10 +26,13 @@ modelled on the dark mode of newer OpenWrt releases (22.03 / 23.05).
 
 ## Installation
 
-### Option 1:
+### Option 1: one command on the router (recommended)
+
+The router needs internet access and a correct system time. Run over SSH
+(replace `<USER>` with the GitHub account name):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
 ```
 
 The script downloads `bootstrap-dark.css` by itself. It needs nothing but `wget`, which is part of
@@ -68,7 +71,7 @@ To make the theme active right after installation, add the `--activate` option
 (the first command is for Option 1, the second for Option 2):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ```
 
@@ -77,6 +80,8 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 - copies the `bootstrap` theme to `bootstrap-dark` and appends the dark CSS;
 - registers the theme in UCI (`luci.themes.BootstrapDark`);
 - adds the theme paths to `/etc/sysupgrade.conf`;
+- makes the hostname in the page header a link to the Status page (in the stock theme it only
+  adds `#` to the address);
 - clears the LuCI cache.
 
 The installer refuses to run if the stock `bootstrap` theme already contains a dark CSS
@@ -86,7 +91,7 @@ The installer refuses to run if the stock `bootstrap` theme already contains a d
 ## Uninstallation
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/uninstall.sh | sh
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/uninstall.sh | sh
 ```
 
 If you still have the downloaded folder, you can run `sh uninstall.sh` from it instead.
@@ -101,7 +106,7 @@ append `bootstrap-dark.css` as is to the stock theme:
 
 ```sh
 cp /www/luci-static/bootstrap/cascade.css /root/cascade.css.bak
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
 ```
 
 The file is wrapped in `@media (prefers-color-scheme: dark)`, so it has no effect in light mode.
@@ -132,6 +137,15 @@ after installation. Reload the page with Ctrl+F5 to see the result.
 - Designed for OpenWrt 19.07. Releases 22.03 and later have a different `bootstrap` layout and
   ship their own dark mode, so this theme is not intended for them.
 - Third-party `luci-app-*` packages that ship their own CSS may still show light elements.
+
+## Versions
+
+See [CHANGELOG.md](CHANGELOG.md) and the Releases page of this repository.
+
+- **v2.0**: the hostname in the page header opens the Status page.
+- **v1.0**: first release.
+
+The `main` branch always contains the latest version.
 
 ## Contributing
 

@@ -3,13 +3,14 @@
 #
 # Usage:
 #   sh install.sh [--activate]
-#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
-#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
+#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 #
 # If bootstrap-dark.css is not found next to this script, it is downloaded from RAW_BASE.
 set -e
 
-RAW_BASE="https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main"
+VERSION="2.0"
+RAW_BASE="https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main"
 
 STATIC_SRC=/www/luci-static/bootstrap
 STATIC_DST=/www/luci-static/bootstrap-dark
@@ -43,10 +44,17 @@ grep -q "Dark mode for LuCI bootstrap" "$CSS" || {
 	[ -z "$TMP_CSS" ] || rm -f "$TMP_CSS"
 	echo "bootstrap-dark.css looks invalid."; exit 1; }
 
+echo "BootstrapDark v$VERSION"
 echo "Copying theme files..."
 rm -rf "$STATIC_DST" "$VIEW_DST"
 cp -r "$STATIC_SRC" "$STATIC_DST"
 cp -r "$VIEW_SRC" "$VIEW_DST"
+
+# The stock header links the hostname to "#". Make it open the Status page instead.
+# (No-op if the header uses a different markup.)
+sed -i -e 's|\(class="brand"[^>]*href="\)#"|\1<%=controller%>/admin/status/overview"|' \
+       -e 's|\(href="\)#"\([^>]*class="brand"\)|\1<%=controller%>/admin/status/overview"\2|' \
+       "$VIEW_DST/header.htm" 2>/dev/null || true
 
 echo "Appending dark CSS (always dark when this theme is selected)..."
 sed '/^@media (prefers-color-scheme: dark) {$/d; /^} \/\* end @media/d' "$CSS" >> "$STATIC_DST/cascade.css"

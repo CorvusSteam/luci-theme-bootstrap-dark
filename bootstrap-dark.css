@@ -1,5 +1,6 @@
 /* ==========================================================
    Dark mode for LuCI bootstrap theme (OpenWrt 19.07)
+   Version 2.0
    Palette is modelled on the dark mode of OpenWrt 22.03/23.05.
    Applies automatically when the OS/browser prefers dark.
    To force dark always: remove the "@media" line and its
@@ -305,14 +306,15 @@ html body .cbi-section-table-row:hover > td,
 html body .cbi-section-table-row:hover > .td,
 html body [class*="cbi-rowstyle"]:hover,
 html body [class*="cbi-rowstyle"]:hover > td,
-html body [class*="cbi-rowstyle"]:hover > .td,
-html body .cbi-section-node:hover,
-html body .cbi-value:hover {
+html body [class*="cbi-rowstyle"]:hover > .td {
 	background-color: var(--bg-hover) !important;
 	background-image: none !important;
 	color: var(--text) !important;
 }
 html body tr:hover .ifacebox, html body .tr:hover .ifacebox { background: var(--bg-card) !important; }
+/* form rows and sections must NOT change color on hover */
+html body .cbi-value:hover { background-color: transparent !important; }
+html body .cbi-section-node:hover { background-color: var(--bg-card) !important; }
 
 /* ---------- badges on the status page (white boxes) ---------- */
 html body .ifacebadge,
@@ -333,7 +335,7 @@ html body .ifacebadge span,
 html body .ifacebadge em {
 	color: var(--text) !important;
 }
-html body .ifacebadge strong { color: var(--text-dim) !important; }
+html body .ifacebadge strong { color: var(--text) !important; }
 html body .ifacebadge:hover { background-color: var(--bg-hover) !important; }
 
 /* empty "no leases" rows: same color across the whole row */
@@ -474,6 +476,14 @@ html body .ifacebox-head:not([style*="background"]) {
 	background-color: var(--bg-alt) !important;
 	background-image: none !important;
 	color: var(--text) !important;
+}
+
+/* device names under the interface icons (br-lan, eth0, ...): same brightness as other text */
+html body .ifacebox-body small,
+html body .ifacebox-body span,
+html body .ifacebox small {
+	color: var(--text) !important;
+	opacity: 1 !important;
 }
 
 } /* end @media (prefers-color-scheme: dark) */

@@ -26,10 +26,13 @@
 
 ## Установка
 
-### Вариант 1:
+### Вариант 1: одна команда на роутере (рекомендуется)
+
+Роутеру нужен доступ в интернет и правильное системное время. Выполните по SSH
+(замените `<USER>` на имя аккаунта GitHub):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
 ```
 
 Скрипт сам скачивает `bootstrap-dark.css`. Нужен только `wget`, который входит в состав OpenWrt,
@@ -68,7 +71,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh
 (первая команда для Варианта 1, вторая для Варианта 2):
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ```
 
@@ -77,6 +80,8 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 - копирует тему `bootstrap` в `bootstrap-dark` и дописывает тёмный CSS;
 - регистрирует тему в UCI (`luci.themes.BootstrapDark`);
 - добавляет пути темы в `/etc/sysupgrade.conf`;
+- делает имя роутера в шапке ссылкой на страницу «Состояние» (в стандартной теме оно лишь
+  добавляет `#` в адрес);
 - очищает кэш LuCI.
 
 Установщик откажется работать, если в стандартной теме `bootstrap` уже есть тёмный CSS
@@ -86,7 +91,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 ## Удаление
 
 ```sh
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/uninstall.sh | sh
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/uninstall.sh | sh
 ```
 
 Если скачанная папка ещё есть, вместо этого можно запустить `sh uninstall.sh` из неё.
@@ -101,7 +106,7 @@ wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dar
 
 ```sh
 cp /www/luci-static/bootstrap/cascade.css /root/cascade.css.bak
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
+wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
 ```
 
 Файл обёрнут в `@media (prefers-color-scheme: dark)`, поэтому в светлом режиме он ни на что не влияет.
@@ -132,6 +137,15 @@ wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dar
 - Тема рассчитана на OpenWrt 19.07. В версиях 22.03 и новее у `bootstrap` другая вёрстка и есть
   собственный тёмный режим, поэтому для них эта тема не предназначена.
 - Сторонние пакеты `luci-app-*` со своим CSS могут по-прежнему содержать светлые элементы.
+
+## Версии
+
+См. [CHANGELOG.md](CHANGELOG.md) и страницу Releases этого репозитория.
+
+- **v2.0**: имя роутера в шапке страницы открывает страницу «Состояние».
+- **v1.0**: первый выпуск.
+
+Ветка `main` всегда содержит последнюю версию.
 
 ## Как помочь
 
