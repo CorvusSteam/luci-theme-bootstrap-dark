@@ -486,4 +486,14 @@ html body .ifacebox small {
 	opacity: 1 !important;
 }
 
+/* bottom action bar (Save & Apply / Save / Reset): no lighter strip, just a separator line */
+html body .cbi-page-actions {
+	background: transparent !important;
+	background-image: none !important;
+	border: none !important;
+	border-top: 1px solid var(--border) !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+}
+
 } /* end @media (prefers-color-scheme: dark) */
