@@ -3,14 +3,14 @@
 #
 # Usage:
 #   sh install.sh [--activate]
-#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh
-#   wget -O - https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
+#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
+#   wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh -s -- --activate
 #
 # If bootstrap-dark.css is not found next to this script, it is downloaded from RAW_BASE.
 set -e
 
 VERSION="2.0"
-RAW_BASE="https://raw.githubusercontent.com/<USER>/luci-theme-bootstrap-dark/main"
+RAW_BASE="https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main"
 
 STATIC_SRC=/www/luci-static/bootstrap
 STATIC_DST=/www/luci-static/bootstrap-dark
@@ -32,7 +32,7 @@ CSS="$DIR/bootstrap-dark.css"
 TMP_CSS=""
 if [ ! -f "$CSS" ]; then
 	case "$RAW_BASE" in
-		*"<"USER">"*) echo "bootstrap-dark.css not found, and RAW_BASE in install.sh still has the USER placeholder."; exit 1 ;;
+		*"<"">"*) echo "bootstrap-dark.css not found, and RAW_BASE in install.sh still has the USER placeholder."; exit 1 ;;
 	esac
 	TMP_CSS="/tmp/bootstrap-dark.css.$$"
 	echo "Downloading bootstrap-dark.css..."
