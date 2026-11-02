@@ -28,10 +28,12 @@ modelled on the dark mode of newer OpenWrt releases (22.03 / 23.05).
 
 ### Option 1: one command on the router (recommended)
 
-The router needs internet access and a correct system time. Run over SSH
-(replace `CorvusSteam` with the GitHub account name):
+The router needs internet access and a correct system time. On a clean OpenWrt 19.07 the packages
+for HTTPS downloads are usually not installed, so install them first (this only needs to be
+done once). Then run the installer, both over SSH:
 
 ```sh
+opkg update && opkg install ca-bundle libustream-mbedtls
 wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/install.sh | sh
 ```
 
@@ -39,10 +41,8 @@ The script downloads `bootstrap-dark.css` by itself. It needs nothing but `wget`
 OpenWrt, and everything goes through `/tmp` (RAM), so no flash space is used. You can read the
 script first by opening the same URL in a browser.
 
-If `wget` reports a certificate or HTTPS error:
-
-- check the time with `date`: with a wrong clock the certificate check fails;
-- make sure HTTPS support is installed: `opkg update && opkg install ca-bundle libustream-mbedtls`.
+If `wget` still reports a certificate error, check the time with `date`: with a wrong clock the
+certificate check fails.
 
 If the repository's default branch is not `main` (for example `master`), change it in the URL.
 

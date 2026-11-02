@@ -32,7 +32,7 @@ CSS="$DIR/bootstrap-dark.css"
 TMP_CSS=""
 if [ ! -f "$CSS" ]; then
 	case "$RAW_BASE" in
-		*"<"">"*) echo "bootstrap-dark.css not found, and RAW_BASE in install.sh still has the USER placeholder."; exit 1 ;;
+		*"<"USER">"*) echo "bootstrap-dark.css not found, and RAW_BASE in install.sh still has the USER placeholder."; exit 1 ;;
 	esac
 	TMP_CSS="/tmp/bootstrap-dark.css.$$"
 	echo "Downloading bootstrap-dark.css..."
