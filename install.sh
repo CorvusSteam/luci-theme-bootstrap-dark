@@ -9,7 +9,7 @@
 # If bootstrap-dark.css is not found next to this script, it is downloaded from RAW_BASE.
 set -e
 
-VERSION="2.0"
+VERSION="2.1"
 RAW_BASE="https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main"
 
 STATIC_SRC=/www/luci-static/bootstrap

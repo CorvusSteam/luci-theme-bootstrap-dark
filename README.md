@@ -137,11 +137,17 @@ after installation. Reload the page with Ctrl+F5 to see the result.
 - Designed for OpenWrt 19.07. Releases 22.03 and later have a different `bootstrap` layout and
   ship their own dark mode, so this theme is not intended for them.
 - Third-party `luci-app-*` packages that ship their own CSS may still show light elements.
+- On narrow screens (phones) the layout is the same as in the stock `bootstrap` theme of 19.07,
+  which is not responsive. The theme changes only colors, not the layout.
+- A few rules use the CSS `:has()` selector (login page, "Apply" in the changes dialog). It needs
+  Chrome/Edge 105+, Firefox 121+ or Safari 15.4+; in older browsers these elements just keep
+  the default look.
 
 ## Versions
 
 See [CHANGELOG.md](CHANGELOG.md) and the Releases page of this repository.
 
+- **v2.1**: many color and readability fixes found during a full page-by-page check.
 - **v2.0**: the hostname in the page header opens the Status page.
 - **v1.0**: first release.
 

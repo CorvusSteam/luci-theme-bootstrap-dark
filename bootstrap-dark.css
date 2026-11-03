@@ -1,6 +1,6 @@
 /* ==========================================================
    Dark mode for LuCI bootstrap theme (OpenWrt 19.07)
-   Version 2.0
+   Version 2.1
    Palette is modelled on the dark mode of OpenWrt 22.03/23.05.
    Applies automatically when the OS/browser prefers dark.
    To force dark always: remove the "@media" line and its
@@ -191,14 +191,14 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
 	box-shadow: none !important;
 }
 .btn:hover, .cbi-button:hover, button:hover { background: #404040 !important; border-color: #6a6a6a !important; }
-.cbi-button-action, .cbi-button-apply, .cbi-button-save, .cbi-button-positive,
-.cbi-button-add, .btn-primary {
+.cbi-button-action, .cbi-button-apply, .cbi-button-edit,
+.btn-primary {
 	background: var(--accent-bg) !important;
 	border-color: #3b74b8 !important;
 	color: #fff !important;
 }
-.cbi-button-action:hover, .cbi-button-apply:hover, .cbi-button-save:hover,
-.cbi-button-add:hover, .btn-primary:hover { background: #3a73b8 !important; }
+.cbi-button-action:hover, .cbi-button-apply:hover, .cbi-button-edit:hover,
+.btn-primary:hover { background: #3a73b8 !important; }
 .cbi-button-negative, .cbi-button-remove, .cbi-button-reset, .btn-danger {
 	background: var(--err) !important;
 	border-color: #8c2c2c !important;
@@ -464,7 +464,7 @@ html body .cbi-dynlist > .add-item > .cbi-button {
 }
 html body .cbi-dynlist > .add-item > .cbi-button-add,
 html body .cbi-dynlist > .add-item > button {
-	background-color: var(--accent-bg) !important;
+	background-color: #2e7d3f !important;
 	color: #fff !important;
 }
 
@@ -520,9 +520,7 @@ html body input[type="submit"]:not([disabled]):hover {
 }
 html body .cbi-button-action:not([disabled]):hover,
 html body .cbi-button-apply:not([disabled]):hover,
-html body .cbi-button-save:not([disabled]):hover,
-html body .cbi-button-positive:not([disabled]):hover,
-html body .cbi-button-add:not([disabled]):hover,
+html body .cbi-button-edit:not([disabled]):hover,
 html body .btn-primary:not([disabled]):hover {
 	background-color: #3a73b8 !important;
 	border-color: #4f87cc !important;
@@ -652,6 +650,194 @@ html body .zonebadge .cbi-tooltip *,
 html body .zonebadge .ifacebadge,
 html body .zonebadge .ifacebadge * {
 	color: var(--text) !important;
+}
+
+/* closed dropdown: the shown (selected) value must not be highlighted in blue,
+   the highlight belongs to the opened list only */
+html body .cbi-dropdown:not([open]) > ul > li[selected],
+html body .cbi-dropdown:not([open]) > ul > li:hover,
+html body .cbi-dropdown:not([open]) > ul > li.focus {
+	background: transparent !important;
+	background-image: none !important;
+	color: var(--text) !important;
+}
+
+/* The original theme gives text a white glow (text-shadow) for light backgrounds.
+   On a dark background it makes the text look blurry, so remove it everywhere. */
+html body *,
+html body *::before,
+html body *::after {
+	text-shadow: none !important;
+}
+
+/* green "positive" and "add" buttons (e.g. "Update lists" in the package manager,
+   "Add" in the wireless list, "+" in dynamic lists, "Save" in dialogs) */
+html body .cbi-button-positive,
+html body .cbi-button-add,
+html body .cbi-button-save {
+	background-color: #2e7d3f !important;
+	background-image: none !important;
+	border-color: #3b9a50 !important;
+	color: #fff !important;
+}
+html body .cbi-button-positive:not([disabled]):hover,
+html body .cbi-button-add:not([disabled]):hover,
+html body .cbi-button-save:not([disabled]):hover {
+	background-color: #3a9650 !important;
+	background-image: none !important;
+	border-color: #52b066 !important;
+	color: #fff !important;
+}
+
+/* Network -> Diagnostics: no lighter background behind the input fields and buttons */
+html body[data-page="admin-network-diagnostics"] .table,
+html body[data-page="admin-network-diagnostics"] .table > .tr,
+html body[data-page="admin-network-diagnostics"] .table .tr:nth-child(n),
+html body[data-page="admin-network-diagnostics"] .table .td,
+html body[data-page="admin-network-diagnostics"] table,
+html body[data-page="admin-network-diagnostics"] tr:nth-child(n) > td {
+	background-color: transparent !important;
+	background-image: none !important;
+	border-color: transparent !important;
+}
+html body[data-page="admin-network-diagnostics"] .table .tr:hover,
+html body[data-page="admin-network-diagnostics"] .table .tr:hover > .td,
+html body[data-page="admin-network-diagnostics"] .table .tr:hover > .th,
+html body[data-page="admin-network-diagnostics"] table tr:hover,
+html body[data-page="admin-network-diagnostics"] table tr:hover > td {
+	background-color: transparent !important;
+	background-image: none !important;
+}
+
+/* the first column of named tables (the "Name" title) is a ::before pseudo-element;
+   the original theme paints it #f5f5f5 on hover, which made it white */
+html body .cbi-section-table .tr:hover::before,
+html body .cbi-section-table-titles.named:hover::before,
+html body .cbi-section-table-descr.named:hover::before,
+html body .cbi-section-table-row[data-title]:hover::before {
+	background-color: var(--bg-hover) !important;
+	color: var(--text) !important;
+}
+html body .cbi-section-table-titles.named::before,
+html body .cbi-section-table-descr.named::before,
+html body .cbi-section-table-row[data-title]::before {
+	color: var(--text) !important;
+}
+/* the title cell of the header row has the same background as the other header cells */
+html body .cbi-section-table-titles.named::before {
+	background-color: var(--bg-alt) !important;
+}
+
+/* neutral zone badges ("this device", "any zone"): the original paints them white/very light.
+   Show them as a dark gray plate with light text instead of a bright white block. */
+html body .zonebadge[style*="#eee"],
+html body .zonebadge[style*="#EEE"],
+html body .zonebadge[style*="#fff"],
+html body .zonebadge[style*="#FFF"],
+html body .zonebadge[style*="white"],
+html body .zonebadge[style*="255, 255, 255"],
+html body .zonebadge[style*="255,255,255"],
+html body .zonebadge[style*="238, 238, 238"],
+html body .zonebadge[style*="238,238,238"] {
+	background-color: #3a3a3a !important;
+	border: 1px solid #5a5a5a !important;
+	color: var(--text) !important;
+}
+html body .zonebadge[style*="#eee"] *,
+html body .zonebadge[style*="#EEE"] *,
+html body .zonebadge[style*="#fff"] *,
+html body .zonebadge[style*="#FFF"] *,
+html body .zonebadge[style*="white"] *,
+html body .zonebadge[style*="255, 255, 255"] *,
+html body .zonebadge[style*="255,255,255"] *,
+html body .zonebadge[style*="238, 238, 238"] *,
+html body .zonebadge[style*="238,238,238"] * {
+	color: var(--text) !important;
+}
+
+/* login page: no lighter card around the user name / password fields.
+   (Detected by the user name field, which exists only on the login form.) */
+html body .cbi-section:has(input[name="luci_username"]),
+html body .cbi-section:has(input[name="luci_username"]) > .cbi-section-node,
+html body .cbi-map:has(input[name="luci_username"]) .cbi-section,
+html body .cbi-map:has(input[name="luci_username"]) .cbi-section-node {
+	background: transparent !important;
+	border-color: transparent !important;
+	box-shadow: none !important;
+}
+html body form:has(input[name="luci_username"]) .cbi-page-actions {
+	border-top-color: transparent !important;
+}
+
+/* "Apply" in the pending-changes dialog stays blue (like Apply at the bottom of pages);
+   other dialog buttons ("Save"...) are green */
+html body .modal:has(.uci-change-list) .cbi-button-positive {
+	background-color: var(--accent-bg) !important;
+	background-image: none !important;
+	border-color: #3b74b8 !important;
+	color: #fff !important;
+}
+html body .modal:has(.uci-change-list) .cbi-button-positive:not([disabled]):hover {
+	background-color: #3a73b8 !important;
+	border-color: #4f87cc !important;
+	color: #fff !important;
+}
+
+/* loading spinner: the original is a small GIF drawn for light backgrounds (looks blurry on dark).
+   Replace it with a crisp CSS spinner.
+   One turn takes exactly 1 s: while changes are applied LuCI rebuilds the dialog (and the spinner)
+   once per second, so a 1 s period makes that restart almost invisible. */
+html body .spinning::before {
+	background: none !important;
+	content: "" !important;
+	box-sizing: border-box;
+	width: 16px !important;
+	height: 16px !important;
+	top: 50% !important;
+	bottom: auto !important;
+	left: 8px !important;
+	margin-top: -8px;
+	border: 2px solid rgba(255, 255, 255, .25);
+	border-top-color: var(--text);
+	border-radius: 50%;
+	animation: bsdark-spin 1s linear infinite;
+}
+@keyframes bsdark-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* small labels ("not installed", header indicators): the original uses white text on light backgrounds */
+html body .label:not(.important):not(.warning):not(.success):not(.notice),
+html body header [data-indicator]:not([data-style="active"]) {
+	background-color: #555 !important;
+	color: #eee !important;
+}
+html body .label.notice,
+html body header [data-indicator][data-style="active"],
+html body .label.warning {
+	color: #111 !important;
+}
+
+/* System -> Startup: the last button of each row ("Stop") is red;
+   the original draws Start / Restart / Stop in the same blue. */
+html body[data-page="admin-system-startup"] .cbi-button-action:last-child {
+	background-color: var(--err) !important;
+	background-image: none !important;
+	border-color: #8c2c2c !important;
+	color: #fff !important;
+}
+html body[data-page="admin-system-startup"] .cbi-button-action:last-child:not([disabled]):hover {
+	background-color: #c94a4a !important;
+	border-color: #a83a3a !important;
+	color: #fff !important;
+}
+
+/* active interface / radio header on the status page ("Connection IPv4", "radio0"):
+   highlighted in blue like in the original (the general header rule above hid it) */
+html body .ifacebox-head.active:not([style*="background"]),
+html body .ifacebox-head.active:not([style*="background"]) * {
+	background-color: var(--accent-bg) !important;
+	color: #fff !important;
 }
 
 } /* end @media (prefers-color-scheme: dark) */
