@@ -13,7 +13,9 @@ modelled on the dark mode of newer OpenWrt releases (22.03 / 23.05).
 
 - Does not replace the stock theme. It is installed as a separate **BootstrapDark** entry under
   *System → System → Language and Style → Theme*.
-- CSS only: nothing to build or compile, no extra packages on the router.
+- Light on resources: about 24 KB of CSS (5 KB gzipped), no JavaScript, no web fonts, no extra images,
+  no extra packages on the router. See [Footprint](#footprint).
+- Always dark: no `@media` tricks, the theme looks the same in any browser setting.
 - Covers the overview page, interfaces, realtime graphs, forms, dynamic lists, tables, tabs,
   dropdowns, buttons, alerts and modal dialogs.
 - Survives firmware upgrades (`sysupgrade`) when settings are kept, thanks to entries in
@@ -38,8 +40,9 @@ wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dar
 ```
 
 The script downloads `bootstrap-dark.css` by itself. It needs nothing but `wget`, which is part of
-OpenWrt, and everything goes through `/tmp` (RAM), so no flash space is used. You can read the
-script first by opening the same URL in a browser.
+OpenWrt. The download goes through `/tmp` (RAM) and is deleted after the installation; the installed
+theme occupies flash space (see [Footprint](#footprint)). You can read the script first by opening
+the same URL in a browser.
 
 If `wget` still reports a certificate error, check the time with `date`: with a wrong clock the
 certificate check fails.
@@ -82,7 +85,7 @@ sh /tmp/luci-theme-bootstrap-dark/install.sh --activate
 - adds the theme paths to `/etc/sysupgrade.conf`;
 - makes the hostname in the page header a link to the Status page (in the stock theme it only
   adds `#` to the address);
-- clears the LuCI cache.
+- clears the LuCI cache and prints the size of the installed theme.
 
 The installer refuses to run if the stock `bootstrap` theme already contains a dark CSS
 (for example, one appended manually). Restore the original `cascade.css` or reinstall
@@ -99,19 +102,15 @@ If you still have the downloaded folder, you can run `sh uninstall.sh` from it i
 The script switches the active theme back to `bootstrap` if needed, removes the theme files and
 the UCI entry, and deletes the lines from `/etc/sysupgrade.conf`.
 
-## Alternative: automatic dark mode
+## Footprint
 
-If you prefer a single theme that turns dark only when your OS or browser uses dark mode,
-append `bootstrap-dark.css` as is to the stock theme:
-
-```sh
-cp /www/luci-static/bootstrap/cascade.css /root/cascade.css.bak
-wget -O - https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main/bootstrap-dark.css >> /www/luci-static/bootstrap/cascade.css
-```
-
-The file is wrapped in `@media (prefers-color-scheme: dark)`, so it has no effect in light mode.
-To undo, restore the backup: `cp /root/cascade.css.bak /www/luci-static/bootstrap/cascade.css`.
-Do not combine this with `install.sh` (see the note above).
+- **Flash:** the installer copies the stock `bootstrap` theme and appends the dark CSS, so the
+  installed theme is about the size of the stock theme plus 24 KB (roughly 58 KB of CSS plus the
+  stock images). The installer prints the exact figures. Flash file systems compress data, so the
+  real usage is lower.
+- **RAM on the router:** the CSS is served from flash. Only the templates of the active theme are
+  loaded. The installer's download in `/tmp` is deleted right after the installation.
+- **Browser:** one 24 KB stylesheet on top of the stock one, no scripts, no extra requests.
 
 ## Customization
 
@@ -147,6 +146,8 @@ after installation. Reload the page with Ctrl+F5 to see the result.
 
 See [CHANGELOG.md](CHANGELOG.md) and the Releases page of this repository.
 
+- **v3.0**: the stylesheet was reorganized and cleaned (27% smaller, 13 documented sections), the
+  theme is always dark (the optional "automatic" mode of v2.x was removed).
 - **v2.1**: many color and readability fixes found during a full page-by-page check.
 - **v2.0**: the hostname in the page header opens the Status page.
 - **v1.0**: first release.

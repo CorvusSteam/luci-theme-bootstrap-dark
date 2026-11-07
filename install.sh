@@ -9,7 +9,7 @@
 # If bootstrap-dark.css is not found next to this script, it is downloaded from RAW_BASE.
 set -e
 
-VERSION="2.1"
+VERSION="3.0"
 RAW_BASE="https://raw.githubusercontent.com/CorvusSteam/luci-theme-bootstrap-dark/main"
 
 STATIC_SRC=/www/luci-static/bootstrap
@@ -57,7 +57,7 @@ sed -i -e 's|\(class="brand"[^>]*href="\)#"|\1<%=controller%>/admin/status/overv
        "$VIEW_DST/header.htm" 2>/dev/null || true
 
 echo "Appending dark CSS (always dark when this theme is selected)..."
-sed '/^@media (prefers-color-scheme: dark) {$/d; /^} \/\* end @media/d' "$CSS" >> "$STATIC_DST/cascade.css"
+cat "$CSS" >> "$STATIC_DST/cascade.css"
 [ -z "$TMP_CSS" ] || rm -f "$TMP_CSS"
 
 echo "Registering theme..."
@@ -73,5 +73,6 @@ for p in "$STATIC_DST" "$VIEW_DST"; do
 done
 
 rm -rf /tmp/luci-indexcache /tmp/luci-modulecache
+echo "Installed theme size (KB): static $(du -sk "$STATIC_DST" | cut -f1), templates $(du -sk "$VIEW_DST" | cut -f1)"
 echo "Done. Hard-refresh the browser (Ctrl+F5) and pick BootstrapDark in"
 echo "System -> System -> Language and Style."

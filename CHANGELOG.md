@@ -1,5 +1,23 @@
 # Changelog
 
+## v3.0
+
+The stylesheet was reorganized and cleaned. Appearance is the same as in v2.1 except for the small
+fixes listed below.
+
+- 13 documented sections (palette, base, header, tabs, cards, tables, forms, buttons, dialogs,
+  status page, graphs, small leftovers, page-specific rules).
+- 33.5 KB -> 24.4 KB (27% smaller): rules that never applied were removed, duplicates merged,
+  the `html body` priority hack went from 181 uses to 54, unused variables and guessed selectors
+  (for example `.cbi-input-user`, `form.login`) were dropped.
+- The theme is always dark. The `@media (prefers-color-scheme: dark)` wrapper and the optional
+  "automatic dark mode" installation method were removed: use *System -> Language and Style* to
+  switch back to the stock theme.
+- The installer no longer post-processes the CSS and prints the size of the installed theme.
+- Fixes: the "Login" button on the login page is blue and "Reset" red; disabled buttons do not react
+  to hover; submit buttons with a color class keep their color on hover; the "x" button of alerts
+  is white on hover; buttons in the file browser keep their own border color.
+
 ## v2.1
 
 A full page-by-page check against the original `bootstrap` theme. Colors and readability only.
